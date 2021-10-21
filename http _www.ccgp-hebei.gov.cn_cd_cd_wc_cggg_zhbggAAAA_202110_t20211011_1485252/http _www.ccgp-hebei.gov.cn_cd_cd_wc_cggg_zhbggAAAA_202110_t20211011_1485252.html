@@ -1,0 +1,877 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="SiteName" content="?????????">
+    <meta name="SiteDomain" content="www.ccgp-hebei.gov.cn">
+    <meta name="SiteIDCode" content="1300000065">
+    <meta name="ArticleTitle" content="2021??????????????????????">
+    <meta name="PubDate" content="2021-10-11">
+    <meta name="ContentSource" content="?????????">
+    <title>????????</title>
+    <style type="text/css">
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+            background-color: #EAF1F7;
+        }
+
+        a.blue:link {
+            color: blue;
+            font-family: "????", "??";
+            font-size: 13px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a.blue:hover {
+            color: #ffe11a;
+            font-family: "????", "??";
+            font-size: 13px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a.blue:visited {
+            color: #0182d6;
+            font-family: "????", "??";
+            font-size: 13px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .title {
+            font-family: "????", "??";
+            font-size: 14px;
+            color: #4a4a4a;
+            text-decoration: none;
+            line-height: 30px;
+            font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript" src="../../../../../libs/js/jquery.js <view-source:http://www.ccgp-hebei.gov.cn/libs/js/jquery.js>"></script>
+    <script type="text/javascript" src="../../../../../libs/js/popup/messager.js <view-source:http://www.ccgp-hebei.gov.cn/libs/js/popup/messager.js>"></script>
+    <script type="text/javascript" src="../../../../../libs/common/js/pinyin.js <view-source:http://www.ccgp-hebei.gov.cn/libs/common/js/pinyin.js>"></script>
+    <script type="text/javascript" src="../../../../../libs/common/js/ajax.js <view-source:http://www.ccgp-hebei.gov.cn/libs/common/js/ajax.js>" charset="UTF-8"></script>
+    <link href="../../../../../img/css.css <view-source:http://www.ccgp-hebei.gov.cn/img/css.css>" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        //????
+        function closeWindow() {
+            window.close();
+        }
+
+        function autoIframeHeight(iframe) {
+            if (iframe) {
+                var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+                if (iframeWin.document.body) {
+                    iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                }
+            }
+        }
+        //??
+        function unique(arr) {
+            if (!Array.isArray(arr)) {
+                console.log('type error!')
+                return
+            }
+            var array =[];
+            for(var i = 0; i < arr.length; i++) {
+                if( array.indexOf( arr[i])==-1 ) {//includes ??????????
+                    array.push(arr[i]);
+                }
+            }
+            return array
+        }
+        function content() {
+            var content = document.getElementById("con").innerText;
+            document.getElementById("con").innerText = content.split("#detail#")[0];
+            var AnncVersion = document.getElementById("AnncVersion").innerText;
+            var temp = content.split("#detail#")[1];
+            var fujian = temp.split("#filename#")[1];
+            var packdetail = temp.split("#filename#")[0];
+            var detail = new Array();
+            var pack = new Array();
+            detail = fujian.split("@_@");
+            for (i = 0; i < detail.length; i++) {
+                var file = detail[i].split("#_#");
+                if (file != "null") {
+                    document.getElementById("fujian").innerHTML += "<a id='files' href='/BidWinAnncFiles/" + file[2] + "." + file[1] + "' class='blue' download>" + file[0] + "</a><br />";
+                    document.getElementById("fujian_2020").innerHTML += "<a id='files' href='/BidWinAnncFiles/" + file[2] + "." + file[1] + "' class='blue' download>" + file[0] + "</a><br />";
+                }
+            }
+            pack = packdetail.split("#_@_@");
+            if (AnncVersion == "V2020") {
+                document.getElementById("OLD_VERSION").innerHTML="";
+                //???????
+                var supplierNames=pack[3].split("#_#");
+                var unipue_SupplierNames=unique(supplierNames);//???????
+                var supplierAddrs=pack[4].split("#_#");
+                var unique_SupplierAddrs=unique(supplierAddrs);//???????
+                var supplierCodes=pack[2].split("#_#");
+                var unique_SupplierCodes=unique(supplierCodes);//???????????
+                for(i = 0;i < unipue_SupplierNames.length;i++){
+                    var getTable = document.getElementById("SupplierInfos");
+                    var addRow = getTable.insertRow();
+                    addRow.style.backgroundColor = "white";
+                    var addC1 = addRow.insertCell(0).innerText = unipue_SupplierNames[i];
+                    var addC2 = addRow.insertCell(1).innerText = unique_SupplierAddrs[i];
+                    var addC3 = addRow.insertCell(2).innerText = unique_SupplierCodes[i];
+                }
+                //??????
+                for(i = 0;i < pack[0].split("#_#").length;i++){
+                    var getGoodsTable=document.getElementById("GoodsSupplierInfo");
+                    var getEngineeringTable=document.getElementById("EngineeringSupplierInfo");
+                    var getServiceTable=document.getElementById("ServiceSupplierInfo");
+                    //??????
+                    if(pack[0].split("#_#")[i]=="A"){
+                        var addRow=getGoodsTable.insertRow();
+                        addRow.style.backgroundColor="white";
+                        var addC1=addRow.insertCell(0).innerText=pack[3].split("#_#")[i];
+                        var addC2=addRow.insertCell(1).innerText=pack[5].split("#_#")[i];
+                        var addC3=addRow.insertCell(2).innerText=pack[15].split("#_#")[i];
+                        var addC4=addRow.insertCell(3).innerText=pack[7].split("#_#")[i];
+                        var addC5=addRow.insertCell(4).innerText=pack[8].split("#_#")[i];
+                        var addC6=addRow.insertCell(5).innerText=pack[9].split("#_#")[i];
+                        if (pack[10].split("#_#")[i] == undefined || pack[10].split("#_#")[i] == "null") {
+                            var addC7 = addRow.insertCell(6).innerText = "";
+                        }
+                        else {
+                            var addC7 = addRow.insertCell(6).innerText = pack[10].split("#_#")[i];
+                        }
+                        if (pack[23].split("#_#")[i] == undefined || pack[23].split("#_#")[i] == "null") {
+                            var addC8 = addRow.insertCell(7).innerText = "";
+                        }
+                        else {
+                            var addC8 = addRow.insertCell(7).innerText = pack[23].split("#_#")[i];
+                        }
+                        if (pack[24].split("#_#")[i] == undefined || pack[24].split("#_#")[i] == "null") {
+                            var addC9 = addRow.insertCell(8).innerText = "";
+                        }
+                        else {
+                            var addC9 = addRow.insertCell(8).innerText = pack[24].split("#_#")[i];
+                        }
+                        if (pack[11].split("#_#")[i] == undefined || pack[11].split("#_#")[i] == "null") {
+                            var addC10=addRow.insertCell(9).innerText="";
+                        }
+                        else {
+                            var addC10=addRow.insertCell(9).innerText=pack[11].split("#_#")[i];
+                        }
+                        if (pack[13].split("#_#")[i] == undefined || pack[13].split("#_#")[i] == "null") {
+                            var addC11 = addRow.insertCell(10).innerText = "";
+                        }
+                        else {
+                            var addC11 = addRow.insertCell(10).innerText = pack[13].split("#_#")[i];
+                        }
+                        if (pack[14].split("#_#")[i] == undefined || pack[14].split("#_#")[i] == "null") {
+                            var addC12 = addRow.insertCell(11).innerText = "";
+                        }
+                        else {
+                            var addC12 = addRow.insertCell(11).innerText = pack[14].split("#_#")[i];
+                        }
+                    }
+                    //??????
+                    else if(pack[0].split("#_#")[i]=="B"){
+                        var addRow=getEngineeringTable.insertRow();
+                        addRow.style.backgroundColor="white";
+                        var addC1=addRow.insertCell(0).innerText=pack[3].split("#_#")[i];
+                        var addC2=addRow.insertCell(1).innerText=pack[5].split("#_#")[i];
+                        var addC3=addRow.insertCell(2).innerText=pack[16].split("#_#")[i];
+                        var addC4=addRow.insertCell(3).innerText=pack[17].split("#_#")[i];
+                        var addC5=addRow.insertCell(4).innerText=pack[19].split("#_#")[i];
+                        var addC6=addRow.insertCell(5).innerText=pack[18].split("#_#")[i];
+                        if (pack[10].split("#_#")[i] == undefined || pack[10].split("#_#")[i] == "null") {
+                            var addC7 = addRow.insertCell(6).innerText = "";
+                        }
+                        else {
+                            var addC7 = addRow.insertCell(6).innerText = pack[10].split("#_#")[i];
+                        }
+                        if (pack[23].split("#_#")[i] == undefined || pack[23].split("#_#")[i] == "null") {
+                            var addC8 = addRow.insertCell(7).innerText = "";
+                        }
+                        else {
+                            var addC8 = addRow.insertCell(7).innerText = pack[23].split("#_#")[i];
+                        }
+                        if (pack[24].split("#_#")[i] == undefined || pack[24].split("#_#")[i] == "null") {
+                            var addC9 = addRow.insertCell(8).innerText = "";
+                        }
+                        else {
+                            var addC9 = addRow.insertCell(8).innerText = pack[24].split("#_#")[i];
+                        }
+                        if (pack[11].split("#_#")[i] == undefined || pack[11].split("#_#")[i] == "null") {
+                            var addC10=addRow.insertCell(9).innerText="";
+                        }
+                        else {
+                            var addC10=addRow.insertCell(9).innerText=pack[11].split("#_#")[i];
+                        }
+                        if (pack[13].split("#_#")[i] == undefined || pack[13].split("#_#")[i] == "null") {
+                            var addC11 = addRow.insertCell(10).innerText = "";
+                        }
+                        else {
+                            var addC11 = addRow.insertCell(10).innerText = pack[13].split("#_#")[i];
+                        }
+                        if (pack[14].split("#_#")[i] == undefined || pack[14].split("#_#")[i] == "null") {
+                            var addC12 = addRow.insertCell(11).innerText = "";
+                        }
+                        else {
+                            var addC12 = addRow.insertCell(11).innerText = pack[14].split("#_#")[i];
+                        }
+                    }
+                    //??????
+                    else if(pack[0].split("#_#")[i]=="C"){
+                        var addRow=getServiceTable.insertRow();
+                        addRow.style.backgroundColor="white";
+                        var addC1=addRow.insertCell(0).innerText=pack[3].split("#_#")[i];
+                        var addC2=addRow.insertCell(1).innerText=pack[5].split("#_#")[i];
+                        var addC3=addRow.insertCell(2).innerText=pack[21].split("#_#")[i];
+                        var addC4=addRow.insertCell(3).innerText=pack[12].split("#_#")[i];
+                        var addC5=addRow.insertCell(4).innerText=pack[22].split("#_#")[i];
+                        var addC6=addRow.insertCell(5).innerText=pack[20].split("#_#")[i];
+                        if (pack[10].split("#_#")[i] == undefined || pack[10].split("#_#")[i] == "null") {
+                            var addC7 = addRow.insertCell(6).innerText = "";
+                        }
+                        else {
+                            var addC7 = addRow.insertCell(6).innerText = pack[10].split("#_#")[i];
+                        }
+                        if (pack[23].split("#_#")[i] == undefined || pack[23].split("#_#")[i] == "null") {
+                            var addC8 = addRow.insertCell(7).innerText = "";
+                        }
+                        else {
+                            var addC8 = addRow.insertCell(7).innerText = pack[23].split("#_#")[i];
+                        }
+                        if (pack[24].split("#_#")[i] == undefined || pack[24].split("#_#")[i] == "null") {
+                            var addC9 = addRow.insertCell(8).innerText = "";
+                        }
+                        else {
+                            var addC9 = addRow.insertCell(8).innerText = pack[24].split("#_#")[i];
+                        }
+                        if (pack[11].split("#_#")[i] == undefined || pack[11].split("#_#")[i] == "null") {
+                            var addC10=addRow.insertCell(9).innerText="";
+                        }
+                        else {
+                            var addC10=addRow.insertCell(9).innerText=pack[11].split("#_#")[i];
+                        }
+                        if (pack[13].split("#_#")[i] == undefined || pack[13].split("#_#")[i] == "null") {
+                            var addC11 = addRow.insertCell(10).innerText = "";
+                        }
+                        else {
+                            var addC11 = addRow.insertCell(10).innerText = pack[13].split("#_#")[i];
+                        }
+                        if (pack[14].split("#_#")[i] == undefined || pack[14].split("#_#")[i] == "null") {
+                            var addC12 = addRow.insertCell(11).innerText = "";
+                        }
+                        else {
+                            var addC12 = addRow.insertCell(11).innerText = pack[14].split("#_#")[i];
+                        }
+                    }
+                    if(pack[0].split("#_#").indexOf("A")==-1){
+                        document.getElementById("Goods").innerHTML="";
+                    }
+                    if(pack[0].split("#_#").indexOf("B")==-1){
+                        document.getElementById("Engineering").innerHTML="";
+                    }
+                    if(pack[0].split("#_#").indexOf("C")==-1){
+                        document.getElementById("Service").innerHTML="";
+                    }
+                }
+            }
+            else {
+                document.getElementById("2020_VERSION").innerHTML = "";
+                if (pack.length < 13 && pack.length > 9) {
+                    document.getElementById("detail").innerHTML = "";
+                    for (a = 0; a < pack[0].split("#_#").length; a++) {
+                        document.getElementById("packdetail").innerHTML += pack[0].split("#_#")[a] + "?? ????? ?<span>" + pack[1].split("#_#")[a] + "</span> ????? <span>" + pack[2].split("#_#")[a] + "?(???) </span> ????????<span>" + pack[3].split("#_#")[a] + "</span>";
+                        if (pack[4].split("#_#")[a] != "" && pack[4].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ??????<span>" + pack[4].split("#_#")[a] + "</span>";
+                        }
+                        if (pack[10].split("#_#")[a] != "" && pack[10].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ???????<span>" + pack[10].split("#_#")[a] + "</span>";
+                        }
+                        if (pack[9].split("#_#")[a] != "" && pack[9].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ?????<span>" + pack[9].split("#_#")[a] + "</span>";
+                        }
+                        if (pack[5].split("#_#")[a] != "" && pack[5].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ?????<span>" + pack[5].split("#_#")[a] + "</span>";
+                        }
+                        if (pack[6].split("#_#")[a] != "" && pack[6].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ?????<span>" + pack[6].split("#_#")[a] + "</span>";
+                        }
+                        if (pack[7].split("#_#")[a] != "" && pack[7].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ???<span>" + pack[7].split("#_#")[a] + "</span>";
+                        }
+                        if (pack[8].split("#_#")[a] != "" && pack[8].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ?????<span>" + pack[8].split("#_#")[a] + "</span>";
+                        }
+                        document.getElementById("packdetail").innerHTML += "<br />";
+                    }
+                } else if (pack.length == 9) {
+                    document.getElementById("detail").innerHTML = "";
+                    for (a = 0; a < pack[0].split("#_#").length; a++) {
+                        document.getElementById("packdetail").innerHTML += pack[0].split("#_#")[a] + "?? ????? ?<span>" + pack[1].split("#_#")[a] + "</span> ????? <span>" + pack[2].split("#_#")[a] + "?(???) </span> ????????<span>" + pack[3].split("#_#")[a] + "</span>";
+                        if (pack[4].split("#_#")[a] != "" && pack[4].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ??????<span>" + pack[4].split("#_#")[a] + "</span>";
+                        }
+                        if (pack[5].split("#_#")[a] != "" && pack[5].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ?????<span>" + pack[5].split("#_#")[a] + "</span>";
+                        }
+                        if (pack[6].split("#_#")[a] != "" && pack[6].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ?????<span>" + pack[6].split("#_#")[a] + "</span>";
+                        }
+                        if (pack[7].split("#_#")[a] != "" && pack[7].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += " ???<span>" + pack[7].split("#_#")[a] + "</span>";
+                        }
+                        if (pack[8].split("#_#")[a] != "" && pack[8].split("#_#")[a] != undefined) {
+                            document.getElementById("packdetail").innerHTML += "?????<span>" + pack[7].split("#_#")[a] + "</span>";
+                        }
+                        //if(pack[9].split("#_#")[a]!=""&&pack[9].split("#_#")[a]!=undefined)
+                        //{
+                        //document.getElementById("packdetail").innerHTML+="?????<span>"+pack[9].split("#_#")[a]+"</span>";
+                        //}
+                        document.getElementById("packdetail").innerHTML += "</br>";
+                    }
+                } else {
+                    for (a = 0; a < pack[0].split("#_#").length; a++) {
+                        var getTable = document.getElementById("detail");
+                        var addRow = getTable.insertRow();
+                        addRow.style.backgroundColor = "white";
+                        switch (pack[0].split("#_#")[a]) {
+                            case "A":
+                                var addC1 = addRow.insertCell(0).innerText = "??";
+                                break;
+                            case "B":
+                                var addC1 = addRow.insertCell(0).innerText = "??";
+                                break;
+                            case "C":
+                                var addC1 = addRow.insertCell(0).innerText = "??";
+                                break;
+                            default:
+                                var addC1 = addRow.insertCell(0).innerText = "";
+                                break;
+                        }
+                        var addC2 = addRow.insertCell(1).innerText = pack[1].split("#_#")[a];
+                        var addC3 = addRow.insertCell(2).innerText = pack[2].split("#_#")[a];
+                        var addC4 = addRow.insertCell(3).innerText = pack[3].split("#_#")[a];
+                        var addC5 = addRow.insertCell(4).innerText = pack[4].split("#_#")[a];
+                        var addC6 = addRow.insertCell(5).innerText = pack[5].split("#_#")[a];
+                        if (pack[6].split("#_#")[a] == undefined || pack[6].split("#_#")[a] == "null") {
+                            var addC7 = addRow.insertCell(6).innerText = "";
+                        } else {
+                            var addC7 = addRow.insertCell(6).innerText = pack[6].split("#_#")[a];
+                        }
+                        if (pack[7].split("#_#")[a] == undefined || pack[7].split("#_#")[a] == "null") {
+                            var addC8 = addRow.insertCell(7).innerText = "";
+                        } else {
+                            var addC8 = addRow.insertCell(7).innerText = pack[7].split("#_#")[a];
+                        }
+                        if (pack[8].split("#_#")[a] == undefined || pack[8].split("#_#")[a] == "null") {
+                            var addC9 = addRow.insertCell(8).innerText = "";
+                        } else {
+                            var addC9 = addRow.insertCell(8).innerText = pack[8].split("#_#")[a];
+                        }
+                        if (pack[9].split("#_#")[a] == undefined || pack[9].split("#_#")[a] == "null") {
+                            var addC10 = addRow.insertCell(9).innerText = "";
+                        } else {
+                            var addC10 = addRow.insertCell(9).innerText = pack[9].split("#_#")[a];
+                        }
+                        var addC11 = addRow.insertCell(10).innerText = pack[10].split("#_#")[a];
+                        if (pack[11].split("#_#")[a] == undefined || pack[11].split("#_#")[a] == "null") {
+                            var addC12 = addRow.insertCell(11).innerText = "";
+                        } else {
+                            var addC12 = addRow.insertCell(11).innerText = pack[11].split("#_#")[a];
+                        }
+                        var addC13 = addRow.insertCell(12).innerText = pack[12].split("#_#")[a];
+                    }
+                }
+                var SERVICEREQUIREMENTS = document.getElementById("SERVICEREQUIREMENTS").innerText;
+                if (SERVICEREQUIREMENTS != "") {
+                    document.getElementById("SERVICEREQUIREMENTS").innerHTML = "?????" + "<span>" + SERVICEREQUIREMENTS + "</span><br />";
+                } else {
+                    document.getElementById("SERVICEREQUIREMENTS").innerHTML = "";
+                }
+                var SPECIFICATIONMODEL = document.getElementById("SPECIFICATIONMODEL").innerText;
+                if (SPECIFICATIONMODEL != "") {
+                    document.getElementById("SPECIFICATIONMODEL").innerHTML = "?????" + "<span>" + SPECIFICATIONMODEL + "</span><br />";
+                } else {
+                    document.getElementById("SPECIFICATIONMODEL").innerHTML = "";
+                }
+            }
+            document.getElementById("AnncVersion").innerHTML="";
+            var spanList=document.getElementsByTagName("span");
+            for(var i=0;i<spanList.length;i++)
+            {
+                if(spanList[i].innerText.trim()=="null")
+                {
+                    spanList[i].innerText="";
+                }
+            }
+        }
+
+        $(function () {
+            $("#navi").find("a").eq(0).html("??");
+        });
+    </script>
+</head>
+
+<body onload="content()">
+
+<!--header start-->
+
+<iframe src="../../../index_651.html <view-source:http://www.ccgp-hebei.gov.cn/cd/cd_wc/index_651.html>" frameborder=0 marginwidth=0 marginheight=0 width=100% scrolling="no" onload="autoIframeHeight(this)" ></iframe>
+<!--header end-->
+
+<div style="display:none">
+    <form id="hmoreform" method="post" action="# <view-source:http://www.ccgp-hebei.gov.cn/cd/cd_wc/cggg/zhbggAAAA/202110/t20211011_1485252.html#>">
+        <!-- <input id="hcurcolumnid" name="curcolumnid" type="hidden" /> -->
+        <input name="citycode" type="hidden" value="130000000" />
+        <input name="cityname" type="hidden" value="???" />
+    </form>
+    <form id="changefirstform" method="post" action="# <view-source:http://www.ccgp-hebei.gov.cn/cd/cd_wc/cggg/zhbggAAAA/202110/t20211011_1485252.html#>">
+        <input id="citycode" name="citycode" type="hidden" value="130000000" />
+        <input id="cityname" name="cityname" type="hidden" value="???" />
+    </form>
+</div>
+
+<!--?? start-->
+<table width="1022" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="197" align="left" valign="top" bgcolor="#FFFFFF">
+            <table width="1002" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table width="1002" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#E4E4E4">
+                            <tr>
+                                <td height="32" bgcolor="#EAEAEA">
+                                    <table width="98%" border="0" align="right" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td align="left">
+                                                <!--??? start-->
+                                                <span class="txt1" id="navi">
+                                                        ??????
+                                                    </span>
+                                                <a href="../../../../ <view-source:http://www.ccgp-hebei.gov.cn/cd/>" title="???" class='a3'>???</a>><a href="../../../ <view-source:http://www.ccgp-hebei.gov.cn/cd/cd_wc/>" title="???" class='a3'>???</a>><a href="../../ <view-source:http://www.ccgp-hebei.gov.cn/cd/cd_wc/cggg/>" title="????" class='a3'>????</a>>????
+                                                    <!--??? end-->
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="AnncVersion">V2020</span>
+                        <table width="930" border="0" align="center" cellpadding="0" cellspacing="0" id="OLD_VERSION">
+                            <tr>
+                                <td align="center">
+                                    <!--???? start-->
+                                    <table width="930" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#bfdff1">
+                                        <tr bgcolor="#edf7fc">
+                                            <td width="110" align="center" bgcolor="#edf7fc" class="txt6">?????</td>
+                                            <td width="199" align="left" bgcolor="#edf7fc" class="txt1">
+                                                0413082820211011001
+                                            </td>
+                                            <td width="94" align="center" bgcolor="#edf7fc" class="txt6">?????</td>
+                                            <td align="left" bgcolor="#edf7fc" class="txt1" colspan="3">
+                                                ????
+                                            </td>
+
+                                        </tr>
+                                        <tr bgcolor="#edf7fc">
+                                            <td align="center" bgcolor="#edf7fc" class="txt6">?????</td>
+                                            <td colspan="5" align="left" bgcolor="#edf7fc" class="txt1">
+                                                ???????????????
+                                            </td>
+                                        </tr>
+                                        <tr bgcolor="#edf7fc">
+                                            <td align="center" bgcolor="#edf7fc" class="txt6">??????</td>
+                                            <td align="left" bgcolor="#edf7fc" class="txt1">
+                                                ???
+                                            </td>
+                                            <td align="center" bgcolor="#edf7fc" class="txt6">????:</td>
+                                            <td align="left" bgcolor="#edf7fc" class="txt1">
+                                                0314-7566207
+                                            </td>
+                                            <td width="79" align="center" bgcolor="#edf7fc" class="txt6">?????</td>
+                                            <td width="170" align="left" bgcolor="#edf7fc" class="txt1">
+                                                ?????????
+                                            </td>
+                                        </tr>
+                                        <tr bgcolor="#edf7fc">
+                                            <td align="center" bgcolor="#edf7fc" class="txt6">???????</td>
+                                            <td align="left" bgcolor="#edf7fc" class="txt1" colspan="5">
+                                                ???????
+                                            </td>
+                                            <!--  <td align="center" bgcolor="#edf7fc" class="txt6">????</td>
+                                             <td align="left" colspan="3" bgcolor="#edf7fc" class="txt1">?????? </td> -->
+                                        </tr>
+                                    </table>
+                                    <!--???? end-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="center"><span class="txt2">2021??????????????????????</span></td>
+                            </tr>
+                            <tr>
+                                <td align="center"><span>(???????1????)</span></td>
+                            </tr>
+                            <tr>
+                                <td height="1" style="background-image:url(../../../../../img/46.jpg)">
+                                    <div align="center"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="10">
+                                    <div align="center"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" class="txt7">
+                                    ?????
+                                    <span>2021-10-11</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <!--?? start-->
+                                    <span class="txt7">
+                                        ???????<span>ZC130800202101632</span><br/>
+                                        ??????<span>????????????????????</span><br/>
+                                        ????????<span>0314-7566207</span> <br/>
+                                        ????? ?<span>??????</span><br/><br/>
+                                        ???????? ?<span>?????????</span><br/>
+                                        ???????? ?<span>??????????????????????????313?</span><br/>
+                                        ?????????? ?<span>0314-7883999</span><br/>
+                                        ?????? ?<span>null</span><br/>
+                                        <span id="SPECIFICATIONMODEL">null</span>
+                                        <span id="SERVICEREQUIREMENTS">null</span>
+                                        <br/>
+                                        ?????<span id="con">#detail#A#_#A#_@_@A#_#B#_@_@91130828MA0F2U281M#_#91130682MA091YFW0B#_@_@??????????#_#????????????#_@_@??????????????????????6?#_#????????????????#_@_@???#_#???#_@_@#_@_@?? Unis526T#_#??#_@_@156#_#156#_@_@4780.00#_#4768.00#_@_@745680#_#743808#_@_@ #_# #_@_@#_@_@#_@_@#_@_@??#_#??#_@_@#_@_@#_@_@#_@_@#_@_@#_@_@#_@_@#_@_@#_@_@#_@_@#filename#2021??????????????????#_#docx#_#4b211afc-3a82-4fce-8ffb-11126a95def1@_@</span><br/>
+                                        ??????<span>0001?01?01?</span><br/>
+                                        <div class="wenben" id="fcontent" style="width: 930px; word-break: normal; overflow: auto; text-overflow: ellipsis; margin-left: 30px; margin-right: 30px; padding: 0px;">
+                                            <table width="1400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#01000" id="detail">
+                                                <tbody>
+                                                <tr>
+                                                    <th width="70" bgcolor="#FFFFFF">????</th>
+                                                    <th width="90" bgcolor="#FFFFFF">??????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">?????????</th>
+                                                    <th width="120" bgcolor="#FFFFFF">?????</th>
+                                                    <th width="250" bgcolor="#FFFFFF">?????</th>
+                                                    <th width="120" bgcolor="#FFFFFF">??????</th>
+                                                    <th width="120" bgcolor="#FFFFFF">??????</th>
+                                                    <th width="120" bgcolor="#FFFFFF">????</th>
+                                                    <th width="60" bgcolor="#FFFFFF">??</th>
+                                                    <th width="60" bgcolor="#FFFFFF">??</th>
+                                                    <th width="80" bgcolor="#FFFFFF">?????</th>
+                                                    <th width="60" bgcolor="#FFFFFF">???</th>
+                                                    <th width="120" bgcolor="#FFFFFF">????</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        </br>
+                                        <span id="packdetail"></span></br>
+                                        ?????<span>0001?01?01?</span><br/>
+                                        <span id="address" class="txt7">?????</span><span>null</span><br/>
+                                        <span id="address" class="txt7">?????</span><span>null</span><br/>
+                                        ????????<span>null</span><br/>
+                                        ?????<span>null</span><br/>
+                                        ???????<span>null</span><br/>
+                                        ???<span></span><br/>
+                                        ??????????<span>???  ???  ???  ???  ???</span></br>
+                                        ?????????<span>?</span></br>
+                                        ?????????<span>0</span>
+                                    </span>
+                                    <!--?? end-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <!--?? start-->
+                            <tr>
+                                <td>
+                                    <span id="fujian" class="blue"></span>
+                                </td>
+                            </tr>
+                            <!--?? end-->
+                            <tr>
+                                <td align="right">
+                                    <form name="form1" id="form1" method="post" action=" <view-source:http://www.ccgp-hebei.gov.cn/cd/cd_wc/cggg/zhbggAAAA/202110/t20211011_1485252.html>">
+                                        <input type="button" value="????" onclick="closeWindow()" class="guanbi" />
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                        <table width="930" border="0" align="center" cellpadding="0" cellspacing="0" id="2020_VERSION">
+                            <tr>
+                                <td align="center">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="center"><span class="txt2">2021??????????????????????</span></td>
+                            </tr>
+                            <tr>
+                                <td height="1" style="background-image:url(../../../../../img/46.jpg)">
+                                    <div align="center"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="10">
+                                    <div align="center"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" class="txt7">
+                                    ?????
+                                    <span>2021-10-11</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <!--?? start-->
+                                    <span class="txt7">
+                                        <span class="title">???????</span><br/>
+                                        <span>ZC130800202101632</span><br/>
+                                        <span class="title">???????</span><br/>
+                                        <span>???????????????</span><br/>
+                                        <span class="title">??????????</span><br/>
+                                        <div class="wenben" id="fcontent" style="width: 930px; word-break: normal; overflow: auto; text-overflow: ellipsis; margin-left: 30px; margin-right: 30px; padding: 0px;">
+                                            <table width="800" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#01000" id="SupplierInfos">
+                                                <tbody>
+                                                <tr>
+                                                    <th width="70" bgcolor="#FFFFFF">?????</th>
+                                                    <th width="90" bgcolor="#FFFFFF">?????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">?????????</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <span class="title">????????</span><br/>
+                                        <div class="wenben" id="Goods" style="width: 930px; word-break: normal; overflow: auto; text-overflow: ellipsis; margin-left: 30px; margin-right: 30px; padding: 0px;">
+                                            <table width="1400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="white" id="GoodsTitle">
+                                                <tbody>
+                                                <tr>
+                                                    <th>??</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table width="1400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#01000" id="GoodsSupplierInfo">
+                                                <tbody>
+                                                <tr>
+                                                    <th width="150" bgcolor="#FFFFFF">?????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">???</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??</th>
+                                                    <th width="150" bgcolor="#FFFFFF">???</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">???</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="wenben" id="Engineering" style="width: 930px; word-break: normal; overflow: auto; text-overflow: ellipsis; margin-left: 30px; margin-right: 30px; padding: 0px;">
+                                            <table width="1400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="white" id="EngineeringTitle">
+                                                <tbody>
+                                                <tr>
+                                                    <th>??</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table width="1400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#01000" id="EngineeringSupplierInfo">
+                                                <tbody>
+                                                <tr>
+                                                    <th width="150" bgcolor="#FFFFFF">?????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">???</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??</th>
+                                                    <th width="150" bgcolor="#FFFFFF">???</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">???</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="wenben" id="Service" style="width: 930px; word-break: normal; overflow: auto; text-overflow: ellipsis; margin-left: 30px; margin-right: 30px; padding: 0px;">
+                                            <table width="1400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="white" id="ServiceTitle">
+                                                <tbody>
+                                                <tr>
+                                                    <th>??</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <table width="1400" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#01000" id="ServiceSupplierInfo">
+                                                <tbody>
+                                                <tr>
+                                                    <th width="150" bgcolor="#FFFFFF">?????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">???</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??</th>
+                                                    <th width="150" bgcolor="#FFFFFF">???</th>
+                                                    <th width="150" bgcolor="#FFFFFF">??????</th>
+                                                    <th width="150" bgcolor="#FFFFFF">???</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <span class="title">???????????????????</span><br/>
+                                        <span>???  ???  ???  ???  ???</span><br/>
+                                        <span class="title">?????????????</span><br/>
+                                        ??????????<span>0</span><br/>
+                                        ??????????:<span>?</span><br/>
+                                        <span class="title">??????</span><br/>
+                                        ?????????1?????<br/>
+                                        <span class="title">????????</span><br/>
+                                        <span></span><br/>
+                                        <span class="title">????????????????????????</span><br />
+                                        1.?????
+                                        ???
+                                        <span>????????????????????</span><br />
+                                        ?? ?
+                                        <span>??????</span><br />
+                                        ?????
+                                        <span>???
+                                        0314-7566207</span><br />
+                                        2.????????<br />
+                                        ?? ?
+                                        <span>?????????</span><br />
+                                        ?? ?
+                                        <span>??????????????????????????313?<br /></span>
+                                        ???? ?
+                                        <span>??  ???
+                                        0314-7883999<br /></span>
+                                        3.??????<br />
+                                        ??????<span>
+                                            ???</span><br />
+                                        ???<span>
+                                            0314-7566207</span><br />
+                                        <span class="title">????</span><br/>
+                                        <span id="fujian_2020"></span><br/>
+                                    </span>
+                                    <!--?? end-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <form name="form1" id="form1" method="post" action=" <view-source:http://www.ccgp-hebei.gov.cn/cd/cd_wc/cggg/zhbggAAAA/202110/t20211011_1485252.html>">
+                                        <input type="button" value="????" onclick="closeWindow()" class="guanbi" />
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>&nbsp;</p>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<!--?? end-->
+
+<!--footer start-->
+<style type="text/css">
+        #zfdb img {
+            border: 0 none;
+            height: auto;
+            max-width: 100%;
+            vertical-align: middle;
+        }
+    </style>
+
+    <div style="background-color:#2E83C3">
+        <table width="1022" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+                <td height="100" bgcolor="#2E83C3">
+                    <table width="1002" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+
+                            <td height="100" valign="top">
+                                <table width="1002" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td height="24">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td height="42" align="center">
+                                            <a class="a7" onclick="changefirstHead()">??</a>
+                                            <a class="a7" onclick="moreColumnHead('xinwenzhongxin-caigouxinwen','getXwzxList_1')"> |????</a>
+                                            <a class="a7" onclick="moreColumnHead('','getBidingList_1')"> | ????</a>
+                                            <a class="a7" onclick="moreColumnHead('caigouxinxi','getCgxxList_1')"> | ????</a>
+                                            <a class="a7" onclick="moreColumnHead('zhongyaotongzhi','getZytzList_1')">| ????</a>
+                                            <a class="a7" onclick="moreColumnHead('zhengcefagui','getZcfgList_1')">| ????</a>
+                                            <a class="a7" onclick="moreColumnHead('lilunshijian','getLlsjList_1')">| ????</a>
+                                            <a class="a7" onclick="moreColumnHead('banshizhinan-caigouren','getBsznList_1')">| ????</a>
+                                            <a class="a7" onclick="moreColumnHead('gonggaotongbao-chengxinjianshe','getGgtbList_1')">| ????</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                    </tr> -->
+                                    <tr>
+                                         <td align="center" class="txt5">
+                                            ????:?????? | Email:hebzfcg@sina.com | ??:?????48? | ??:050051
+                                            <br />
+                                            ????:?????????? | ????????0311?66651000 &nbsp;&nbsp;<a href="http://www.ccgp-hebei.gov.cn/province/map/201805/t20180523_847997.html <view-source:http://www.ccgp-hebei.gov.cn/province/map/201805/t20180523_847997.html>">????</a>
+                                            <br />
+                                            <a href="http://beian.miit.gov.cn <view-source:http://beian.miit.gov.cn/>" target="_blank" style="color:white;font-weight:normal;">?ICP?13016076?-2</a>  &nbsp;&nbsp;  ?????: 1300000065  &nbsp; <a href="../../../../../province/map/ <view-source:http://www.ccgp-hebei.gov.cn/province/map/>" class='txt5'>????</a>
+<div style="width:300px;margin:0 auto;text-align: center;">
+<img src="http://www.hebei.gov.cn/hebei/resource/cms/2018/01/img_pc_site/beiantubiao.png <view-source:http://www.hebei.gov.cn/hebei/resource/cms/2018/01/img_pc_site/beiantubiao.png>" style="float: none;" /> 
+????? <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13010402001602 <view-source:http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13010402001602>" target="_blank" style="color:white;font-weight:normal;">13010402001602</a>
+		 	</div>
+                                            <div id="zfdb">
+                                            <script id="_jiucuo_" sitecode='1300000065' src='http://pucha.kaipuyun.cn/exposure/jiucuo.js <view-source:http://pucha.kaipuyun.cn/exposure/jiucuo.js>'></script>
+                                            <script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='http://dcs.conac.cn/js/05/000/0000/60849783/CA050000000608497830001.js' type='text/javascript'%3E%3C/script%3E"));</script></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+<!--footer end-->
+
+</body>
+</html>
